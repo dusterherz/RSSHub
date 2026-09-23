@@ -5,6 +5,7 @@ name: 'NAS image'
 on:
     push:
         branches:
+            - master
             - fix/patreon-flaresolverr
         paths:
             - '.github/workflows/nas-image.yml'
