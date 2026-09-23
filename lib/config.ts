@@ -22,6 +22,7 @@ type ConfigEnvKeys =
     | 'UA'
     | 'NO_RANDOM_UA'
     | 'ALLOW_ORIGIN'
+    | 'FLARESOLVERR_URL'
     // Cache
     | 'CACHE_TYPE'
     | 'CACHE_REQUEST_TIMEOUT'
@@ -177,7 +178,6 @@ type ConfigEnvKeys =
     | 'NHENTAI_PASSWORD'
     | 'NOTION_TOKEN'
     | 'ONLYFANS_COOKIE'
-    | 'PATREON_FLARESOLVERR_URL'
     | 'PATREON_SESSION_ID'
     | 'PIANYUAN_COOKIE'
     | 'PIXABAY_KEY'
@@ -302,6 +302,10 @@ export type Config = {
     httpCache: {
         url?: string;
         token?: string;
+    };
+    // browser relay
+    flaresolverr: {
+        url?: string;
     };
     // proxy
     proxyUri?: string;
@@ -581,7 +585,6 @@ export type Config = {
         cookie?: string;
     };
     patreon: {
-        flaresolverrUrl?: string;
         sessionId?: string;
     };
     pianyuan: {
@@ -819,6 +822,10 @@ const calculateValue = () => {
         httpCache: {
             url: envs.CACHE_HTTP_URL,
             token: envs.CACHE_HTTP_TOKEN,
+        },
+        // browser relay
+        flaresolverr: {
+            url: envs.FLARESOLVERR_URL,
         },
         // proxy
         proxyUri: envs.PROXY_URI,
@@ -1103,7 +1110,6 @@ const calculateValue = () => {
             cookie: envs.ONLYFANS_COOKIE,
         },
         patreon: {
-            flaresolverrUrl: envs.PATREON_FLARESOLVERR_URL,
             sessionId: envs.PATREON_SESSION_ID,
         },
         pianyuan: {

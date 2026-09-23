@@ -91,7 +91,7 @@ export const route: Route = {
     features: {
         requireConfig: [
             {
-                name: 'PATREON_FLARESOLVERR_URL',
+                name: 'FLARESOLVERR_URL',
                 optional: true,
                 description: 'URL of a FlareSolverr instance, required to get past the Cloudflare challenge Patreon serves on both its pages and its API',
             },
