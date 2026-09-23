@@ -35989,20 +35989,6 @@
       }
     ]
   },
-  "patreon.com": {
-    "_name": "Patreon",
-    ".": [
-      {
-        "title": "Home",
-        "docs": "https://docs.rsshub.app/routes/new-media",
-        "source": [
-          "/:creator",
-          "/cw/:creator"
-        ],
-        "target": "/patreon/:creator"
-      }
-    ]
-  },
   "paulgraham.com": {
     "_name": "Paul Graham",
     ".": [
@@ -51981,6 +51967,20 @@
           "/"
         ],
         "target": "/openai/cookbook"
+      }
+    ]
+  },
+  "patreon.com": {
+    "_name": "Patreon",
+    ".": [
+      {
+        "title": "Home",
+        "docs": "https://docs.rsshub.app/routes/new-media",
+        "source": [
+          "/:creator",
+          "/cw/:creator"
+        ],
+        "target": "/patreon/:creator"
       }
     ]
   },

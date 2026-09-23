@@ -7126,9 +7126,6 @@
   "/patagonia/new-arrivals/:category": [
     "IvanWng97"
   ],
-  "/patreon/:creator": [
-    "TonyRL"
-  ],
   "/paulgraham/articles": [
     "Maecenas",
     "nczitzk",
@@ -11570,6 +11567,9 @@
   "/openai/research": [
     "yuguorui",
     "chesha1"
+  ],
+  "/patreon/:creator": [
+    "TonyRL"
   ],
   "/pikabu/community/:name": [
     "TonyRL"
