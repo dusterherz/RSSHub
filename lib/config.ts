@@ -22,6 +22,7 @@ type ConfigEnvKeys =
     | 'UA'
     | 'NO_RANDOM_UA'
     | 'ALLOW_ORIGIN'
+    | 'FLARESOLVERR_URL'
     // Cache
     | 'CACHE_TYPE'
     | 'CACHE_REQUEST_TIMEOUT'
@@ -301,6 +302,10 @@ export type Config = {
     httpCache: {
         url?: string;
         token?: string;
+    };
+    // browser relay
+    flaresolverr: {
+        url?: string;
     };
     // proxy
     proxyUri?: string;
@@ -817,6 +822,10 @@ const calculateValue = () => {
         httpCache: {
             url: envs.CACHE_HTTP_URL,
             token: envs.CACHE_HTTP_TOKEN,
+        },
+        // browser relay
+        flaresolverr: {
+            url: envs.FLARESOLVERR_URL,
         },
         // proxy
         proxyUri: envs.PROXY_URI,
