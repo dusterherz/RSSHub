@@ -177,6 +177,7 @@ type ConfigEnvKeys =
     | 'NHENTAI_PASSWORD'
     | 'NOTION_TOKEN'
     | 'ONLYFANS_COOKIE'
+    | 'PATREON_FLARESOLVERR_URL'
     | 'PATREON_SESSION_ID'
     | 'PIANYUAN_COOKIE'
     | 'PIXABAY_KEY'
@@ -580,6 +581,7 @@ export type Config = {
         cookie?: string;
     };
     patreon: {
+        flaresolverrUrl?: string;
         sessionId?: string;
     };
     pianyuan: {
@@ -1101,6 +1103,7 @@ const calculateValue = () => {
             cookie: envs.ONLYFANS_COOKIE,
         },
         patreon: {
+            flaresolverrUrl: envs.PATREON_FLARESOLVERR_URL,
             sessionId: envs.PATREON_SESSION_ID,
         },
         pianyuan: {
