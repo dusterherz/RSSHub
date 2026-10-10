@@ -56,12 +56,20 @@ const renderDescription = ({ attributes, relationships, included, videoPreview }
                     ) : null}
                 </>
             ) : postType === 'video_embed' || postType === 'link' ? (
-                previewImage ? (
-                    <>
-                        <img src={previewImage} />
-                        <br />
-                    </>
-                ) : null
+                <>
+                    {previewImage ? (
+                        <>
+                            <img src={previewImage} />
+                            <br />
+                        </>
+                    ) : null}
+                    {attributes.embed?.url ? (
+                        <>
+                            <a href={attributes.embed.url}>{attributes.embed.subject || attributes.embed.url}</a>
+                            <br />
+                        </>
+                    ) : null}
+                </>
             ) : postType === 'text_only' ? null : (
                 <>
                     Post type: "{postType}" is not supported.
@@ -81,6 +89,27 @@ const renderDescription = ({ attributes, relationships, included, videoPreview }
                 : null}
         </>
     );
+};
+
+/**
+ * Readers only see audio and video as enclosures; the <audio>/<video> tags above are for display.
+ * Audio wins over video, as a podcast post may also carry a cover clip.
+ */
+const renderEnclosure = ({ attributes, relationships, videoPreview }) => {
+    const audio = relationships.audio?.attributes?.download_url ? relationships.audio.attributes : relationships.audio_preview?.attributes;
+    if (audio?.download_url) {
+        const duration = audio.metadata?.duration;
+        return {
+            enclosure_url: audio.download_url,
+            enclosure_type: 'audio/mpeg',
+            ...(typeof duration === 'number' && duration > 0 && { itunes_duration: Math.round(duration) }),
+        };
+    }
+    const video = attributes.post_type === 'video_external_file' ? attributes.post_file?.url || videoPreview?.attributes?.download_url : undefined;
+    if (video) {
+        return { enclosure_url: video, enclosure_type: new URL(video).pathname.endsWith('.m3u8') ? 'application/x-mpegURL' : 'video/mp4' };
+    }
+    return {};
 };
 
 export const route: Route = {
@@ -196,6 +225,8 @@ async function handler(ctx) {
             link: attributes.url,
             pubDate: parseDate(attributes.published_at),
             image: attributes.thumbnail?.url ?? attributes.image?.url,
+            itunes_item_image: attributes.thumbnail?.url ?? attributes.image?.url,
+            ...renderEnclosure({ attributes, relationships, videoPreview }),
             category,
         };
     });
