@@ -51,8 +51,16 @@ interface Attributes {
     was_posted_by_campaign_owner: boolean;
     thumbnail: Thumbnail | null;
     content_json_string?: string | null;
-    embed?: null;
+    embed?: Embed | null;
     post_file?: PostFile | null;
+}
+
+interface Embed {
+    url: string;
+    subject?: string | null;
+    description?: string | null;
+    provider?: string | null;
+    html?: string | null;
 }
 
 interface Image {
